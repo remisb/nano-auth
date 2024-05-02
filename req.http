@@ -1,0 +1,40 @@
+### Authorization by token, part 1. Retrieve and save token.
+POST http://admin:secret@0.0.0.0:8000/login
+Content-Type: application/json
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Authorization by token, part 2. Use token to authorize.
+GET http://0.0.0.0:8000/resource
+Authorization: Bearer {{auth_token}}
+
+### Authorization by token, part 1. Retrieve and save token.
+POST http://admin:secret@0.0.0.0:8000/loginJwt
+Content-Type: application/json
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Authorization by token, part 2. Use token to authorize.
+GET http://0.0.0.0:8000/resourceJwt
+Authorization: Bearer {{auth_token}}
+
+###
+GET http://localhost:8000/
+Accept: application/json
+
+HTTP/1.1 200 OK
+
+Auth service home.
+
+###
+GET http://admin:secret@localhost:8000/httpBasic
+Accept: application/json
+
+HTTP/1.1 200 OK
+
+Auth service home.
+
+#Method Request-URI HTTP-Version
+#Header-field: Header-value
+#
+#Request-Body
